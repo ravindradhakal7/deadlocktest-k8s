@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: deadlocktest-service
+spec:
+  selector:
+    app: deadlocktest
+  ports:
+    - protocol: TCP
+      port: 80  # External port to access the application
+      targetPort: 8080  # Internal container port
+  type: LoadBalancer  # Exposes the service externally

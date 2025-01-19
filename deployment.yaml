@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deadlocktest-deployment
+spec:
+  replicas: 2  # Set initial number of replicas to 2 (for autoscaling, this will change dynamically)
+  selector:
+    matchLabels:
+      app: deadlocktest
+  template:
+    metadata:
+      labels:
+        app: deadlocktest
+    spec:
+      containers:
+        - name: deadlocktest
+          image: ravindradhakal/deadlocktest:latest  # Replace with your Docker Hub image name
+          ports:
+            - containerPort: 8080  # Adjust if your app runs on a different port
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "500m"
+            limits:
+              memory: "256Mi"
+              cpu: "1"
